@@ -1,0 +1,5 @@
+.slid:hover{
+    border-radius: 10px ;
+    transition: 0.3s;
+    box-shadow: 15px 10px #3a0707a8;
+}
