@@ -1,5 +1,11 @@
 .slid:hover{
     border-radius: 10px ;
-    transition: 0.3s;
-    box-shadow: 15px 10px #3a0707a8;
+    transition: 0.2s;
+    box-shadow: 12px 12px 2px 1px rgba(112, 112, 114, 0.2);
+}
+.swiper-button-prev{
+    color:black;
+}
+.swiper-button-next{
+    color:black;
 }

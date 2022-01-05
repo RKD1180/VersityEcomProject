@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -11,20 +11,32 @@ import "./Style.css";
 // import Swiper core and required modules
 import SwiperCore, { Pagination, Navigation } from "swiper";
 
-import { Button, Card, Container, Row } from "react-bootstrap";
-import pd1 from "../../../img/1.jpg";
-import pd2 from "../../../img/4.png";
+import { Container, Row, Spinner } from "react-bootstrap";
+
+import SliderProduct from "../SliderProduct/SliderProduct";
 
 const ProductSlider = () => {
   SwiperCore.use([Pagination, Navigation]);
+  const [getProducts, setProducts] = useState([]);
+  let products = [];
+  for (let i = getProducts.length - 1; i >= 0; i--) {
+    products.push(getProducts[i]);
+  }
+
+  useEffect(() => {
+    const url = `http://localhost:5000/products`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
   return (
     <Container fluid>
-      <h2 className="fw-bold mt-3 mb-3 text-center">Latest Product</h2>
+      <h2 className="fw-bold mt-3 mb-3 text-center mb-5">Latest Product</h2>
       <Row>
         <Swiper
           slidesPerView={4}
-          spaceBetween={30}
+          spaceBetween={20}
           slidesPerGroup={3}
           loop={true}
           loopFillGroupWithBlank={true}
@@ -34,110 +46,19 @@ const ProductSlider = () => {
           navigation={true}
           className="mySwiper"
         >
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd1} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd2} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd1} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd2} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd1} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd2} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd1} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
-          <SwiperSlide width={250}>
-            <Card style={{ width: "18rem", height: "29rem" }}>
-              <Card.Img variant="top" height={250} src={pd2} />
-              <Card.Body>
-                <Card.Title>Card Title</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          </SwiperSlide>
+          {products.length === 0 ? (
+            <>
+              <Spinner animation="border" variant="warning" />
+            </>
+          ) : (
+            <>
+              {products.map((product) => (
+                <SwiperSlide>
+                  <SliderProduct product={product}></SliderProduct>
+                </SwiperSlide>
+              ))}
+            </>
+          )}
         </Swiper>
       </Row>
     </Container>

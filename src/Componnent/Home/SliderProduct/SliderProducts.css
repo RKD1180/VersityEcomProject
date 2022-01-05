@@ -1,0 +1,6 @@
+.product:hover{
+    box-shadow: 12px 12px 2px 1px rgba(112, 112, 114, 0.2);
+    width: 280px;
+    height: 310px;
+    transition: 0.3s;
+}

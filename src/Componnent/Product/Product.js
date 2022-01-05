@@ -1,52 +1,44 @@
 import React from "react";
-import { Card, CardGroup } from "react-bootstrap";
-import pd from "../../img/5.png";
-import pd1 from "../../img/4.png";
+import { Button, Card, Col } from "react-bootstrap";
 
-const Product = () => {
+import { Link } from "react-router-dom";
+import "./Product.css";
+
+const Product = (props) => {
+  const { name, price, discription, productImage } = props.product;
+
   return (
-    <CardGroup>
-      <Card className="">
-        <Card.Img variant="top" src={pd} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-      <Card>
-        <Card.Img variant="top" src={pd1} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This card has supporting text below as a natural lead-in to
-            additional content.{" "}
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-      <Card>
-        <Card.Img variant="top" src={pd} />
-        <Card.Body>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This card has even longer content than the
-            first to show that equal height action.
-          </Card.Text>
-        </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
-        </Card.Footer>
-      </Card>
-    </CardGroup>
+    <>
+      <Col>
+        <Card style={{ height: 500 }} className="product">
+          <Card.Img
+            variant="top"
+            src={`data:image/png;base64, ${productImage}`}
+            style={{ height: 250, width: 250 }}
+          />
+          <Card.Body>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{discription.slice(0, 50)}</Card.Text>
+            <Card.Text className="fw-bold text-danger">
+              Price: {price}{" "}
+              <span style={{ fontSize: 20 }} className="fw-bold">
+                &#2547;
+              </span>
+            </Card.Text>
+            <Col className="mb-3">
+              <Link to="/">
+                <Button variant="warning">Buy Now</Button>
+              </Link>
+              <Link to="/">
+                <Button variant="success" className="ms-3 ">
+                  Details
+                </Button>
+              </Link>
+            </Col>
+          </Card.Body>
+        </Card>
+      </Col>
+    </>
   );
 };
 

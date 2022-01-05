@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
   return (
     <>
-      <DrawerNavigation className="shadow text-center pb-5 pt-4">
+      <DrawerNavigation fixed="top" className="shadow text-center pb-5 pt-4">
         <DrawerNavigationHeader>
           <h2 className="text-black">Brand Name</h2>
         </DrawerNavigationHeader>
