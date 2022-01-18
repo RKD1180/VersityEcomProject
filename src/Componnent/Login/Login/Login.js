@@ -15,7 +15,14 @@ import useAuth from "./../../../hooks/useAuth";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({});
-  const { user, isLoading, authError, loginUser, signInWithGoole } = useAuth();
+  const {
+    user,
+    isLoading,
+    authError,
+    loginUser,
+    signInWithGoole,
+    resetPassowrd,
+  } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -28,13 +35,17 @@ const Login = () => {
   };
 
   const handleLoginSubmit = (e) => {
-    alert("Login Successfull");
     loginUser(loginData.email, loginData.password, location, navigate);
     e.preventDefault();
   };
 
   const handleGooleSignIn = () => {
     signInWithGoole(location, navigate);
+  };
+
+  const handleReset = () => {
+    resetPassowrd(loginData.email);
+    alert("Check Your Email For Reset Password");
   };
   return (
     <Container className="shadow mt-4 rounded">
@@ -70,6 +81,9 @@ const Login = () => {
           {isLoading && <Spinner animation="border" variant="success" />}
           {user?.email && <Alert variant="success">Login Successful</Alert>}
           {authError && <Alert variant="danger">{authError}</Alert>}
+          <Button variant="outline-danger" onClick={handleReset}>
+            <p>Forgot Password?</p>
+          </Button>
           <h6 className="mt-3">
             New User{" "}
             <Link to="/registration">

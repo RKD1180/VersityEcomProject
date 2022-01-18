@@ -25,11 +25,13 @@ const AddProduct = () => {
   };
 
   const handleProduct = (e) => {
-    const { productName, productPrice, productDiscription } = productInfo;
+    const { productName, productPrice, productDiscription, productBrand } =
+      productInfo;
     e.preventDefault();
 
     const formData = new FormData();
     formData.append("productName", productName);
+    formData.append("productBrand", productBrand);
     formData.append("productPrice", productPrice);
     formData.append("productDiscription", productDiscription);
     formData.append("productImage", productImage);
@@ -65,6 +67,18 @@ const AddProduct = () => {
                 name="productName"
                 placeholder="Product Name"
                 onBlur={handleOnBlur}
+                required
+              />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label>Product Brand</Form.Label>
+              <Form.Control
+                type="text"
+                name="productBrand"
+                placeholder="Product Brand"
+                onBlur={handleOnBlur}
+                required
               />
             </Form.Group>
 
@@ -74,6 +88,7 @@ const AddProduct = () => {
                 type="number"
                 value={productNumber}
                 onClick={productCode}
+                required
               />
             </Form.Group>
 
@@ -84,6 +99,7 @@ const AddProduct = () => {
                 name="productPrice"
                 placeholder="Price"
                 onBlur={handleOnBlur}
+                required
               />
             </Form.Group>
 
@@ -97,6 +113,7 @@ const AddProduct = () => {
                 name="productDiscription"
                 onBlur={handleOnBlur}
                 rows={3}
+                required
               />
             </Form.Group>
 
@@ -107,6 +124,7 @@ const AddProduct = () => {
                 onChange={(e) => setProductImage(e.target.files[0])}
                 name="productImage"
                 accept="image/*"
+                required
               />
             </Form.Group>
 

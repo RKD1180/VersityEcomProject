@@ -18,13 +18,18 @@ const Header = () => {
               </Link>
             </Nav.Link>
             <Nav.Link>
+              <Link to="/allproducts">
+                <Button variant="outline-light">All Products</Button>
+              </Link>
+            </Nav.Link>
+            <Nav.Link>
               <Link to="/about">
                 <Button variant="outline-light">About</Button>
               </Link>
             </Nav.Link>
             <Nav.Link>
-              <Link to="/allproducts">
-                <Button variant="outline-light">All Products</Button>
+              <Link to="/contactus">
+                <Button variant="outline-light">ContactUs</Button>
               </Link>
             </Nav.Link>
           </Nav>
@@ -33,12 +38,13 @@ const Header = () => {
               <>
                 <Nav.Link>
                   <Link
-                    to="/dashboard"
+                    to={`/dashboard/${user.email}`}
                     className="text-decoration-none text-white pt-5"
                   >
                     Dashboard
                   </Link>
                 </Nav.Link>
+
                 <Nav.Link>
                   <Button onClick={logOut} variant="outline-danger">
                     Log Out

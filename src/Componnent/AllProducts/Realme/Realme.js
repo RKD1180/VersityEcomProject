@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Col, Container, Row, Spinner } from "react-bootstrap";
-import Product from "../Product/Product";
-import SideBar from "./SideBar/SideBar";
+import Product from "../../Product/Product";
+import SideBar from "./../SideBar/SideBar";
 
-const AllProducts = () => {
+const Realme = () => {
   const [getProducts, setProducts] = useState([]);
   let products = [];
-  for (let i = getProducts.length - 1; i >= 0; i--) {
-    products.push(getProducts[i]);
-  }
+  const text = "realme";
+  const realmeProducts = getProducts.filter((filterProduct) =>
+    filterProduct.brand?.toLowerCase().includes(text)
+  );
+  products = realmeProducts;
+  console.log(products.length);
 
   useEffect(() => {
     const url = `http://localhost:5000/products`;
@@ -25,9 +28,7 @@ const AllProducts = () => {
         </Col>
         <Col md={8} xs={12} className="mt-5">
           {products.length === 0 ? (
-            <Col class="d-flex justify-content-center">
-              <Spinner animation="border" variant="warning" />
-            </Col>
+            <Spinner animation="border" variant="warning" />
           ) : (
             <Row xs={12} md={3} className="g-4">
               {products.map((product) => (
@@ -41,4 +42,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default Realme;

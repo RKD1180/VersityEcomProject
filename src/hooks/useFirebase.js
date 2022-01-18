@@ -9,6 +9,8 @@ import {
   updateProfile,
   signInWithPopup,
   GoogleAuthProvider,
+  sendEmailVerification,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 
 initializeFirebase();
@@ -29,6 +31,8 @@ const useFirebase = () => {
         // console.log(result.user);
         updateUser(name);
         setAuthError("");
+        saveUser(email, name, "POST");
+        verifiEmail();
         // ...
         navigate("/");
       })
@@ -55,7 +59,9 @@ const useFirebase = () => {
   const signInWithGoole = (location, navigate) => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
+        const user = result.user;
         setAuthError("");
+        saveUser(user.email, user.displayName, "PUT");
         const destination = location?.state?.from || "/";
         navigate(destination);
       })
@@ -64,12 +70,30 @@ const useFirebase = () => {
       });
   };
 
+  const verifiEmail = () => {
+    sendEmailVerification(auth.currentUser).then(() => {
+      // Email verification sent!
+      // ...
+    });
+  };
+
+  const resetPassowrd = (email) => {
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        setAuthError("");
+      })
+      .catch((error) => {
+        setAuthError(error.message);
+        // ..
+      });
+  };
+
   const loginUser = (email, password, navigate, location) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        setAuthError("");
         const destination = location?.state?.from || "/";
         navigate(destination);
+        setAuthError("");
       })
       .catch((error) => {
         setAuthError(error.message);
@@ -87,7 +111,7 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return () => unsubscribe;
-  }, []);
+  }, [auth]);
 
   const logOut = () => {
     signOut(auth)
@@ -100,6 +124,18 @@ const useFirebase = () => {
       });
   };
 
+  const saveUser = (email, displayName, method) => {
+    const user = { email, displayName };
+
+    fetch("http://localhost:5000/users", {
+      method: method,
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+  };
+
   return {
     user,
     registerUser,
@@ -109,6 +145,7 @@ const useFirebase = () => {
     updateUser,
     authError,
     signInWithGoole,
+    resetPassowrd,
   };
 };
 

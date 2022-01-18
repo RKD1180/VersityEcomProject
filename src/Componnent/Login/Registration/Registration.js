@@ -59,6 +59,7 @@ const Registration = () => {
                   name="name"
                   onChange={handleRegistration}
                   placeholder="Your Name"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -68,6 +69,7 @@ const Registration = () => {
                   name="email"
                   onChange={handleRegistration}
                   placeholder="Enter email"
+                  required
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -77,6 +79,7 @@ const Registration = () => {
                   name="password"
                   onChange={handleRegistration}
                   placeholder="Password"
+                  required
                 />
               </Form.Group>
               <Button variant="warning" type="submit">
@@ -90,7 +93,7 @@ const Registration = () => {
           )}
           {isLoading && <Spinner animation="border" variant="success" />}
           {user?.email && (
-            <Alert variant="success">Registration Successful</Alert>
+            <Alert variant="success">Please Check Your Email For Verify</Alert>
           )}
           {authError && <Alert variant="danger">{authError}</Alert>}
           <h6 className="mt-3">

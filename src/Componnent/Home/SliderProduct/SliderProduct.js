@@ -2,9 +2,33 @@ import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./SliderProducts.css";
+import useAuth from "./../../../hooks/useAuth";
 
 const SliderProduct = (props) => {
-  const { name, price, productImage } = props.product;
+  const { user } = useAuth();
+  const { name, price, productImage, code, _id } = props.product;
+
+  const handlePurches = () => {
+    const order = {
+      cus_name: user?.displayName,
+      cus_email: user?.email,
+      product_name: name,
+      product_price: price,
+      product_code: code,
+    };
+    const url = `http://localhost:5000/init`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        window.location.replace(data);
+      });
+  };
   return (
     <Col>
       <Card style={{ height: 330, width: 300 }} className="product">
@@ -15,7 +39,7 @@ const SliderProduct = (props) => {
           className="mx-auto"
         />
         <Card.Body>
-          <Card.Title>{name}</Card.Title>
+          <Card.Title>{name.slice(0, 30)}</Card.Title>
 
           <Card.Text className="fw-bold text-danger">
             Price: {price}{" "}
@@ -24,10 +48,11 @@ const SliderProduct = (props) => {
             </span>
           </Card.Text>
           <Col className="mb-3">
-            <Link to="/">
-              <Button variant="warning">Buy Now</Button>
-            </Link>
-            <Link to="/">
+            <Button onClick={handlePurches} variant="warning">
+              Buy Now
+            </Button>
+
+            <Link to={`/productsDetails/${_id}`}>
               <Button variant="success" className="ms-3 ">
                 Details
               </Button>

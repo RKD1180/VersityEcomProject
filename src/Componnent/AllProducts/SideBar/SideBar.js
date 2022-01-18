@@ -9,7 +9,11 @@ import { Link } from "react-router-dom";
 const SideBar = () => {
   return (
     <>
-      <DrawerNavigation fixed="top" className="shadow text-center pb-5 pt-4">
+      <DrawerNavigation
+        style={{ position: "fixed", width: "20rem" }}
+        fixed="top"
+        className="shadow text-center pb-5 pt-4 rounded mb-5"
+      >
         <DrawerNavigationHeader>
           <h2 className="text-black">Brand Name</h2>
         </DrawerNavigationHeader>
@@ -17,23 +21,23 @@ const SideBar = () => {
         {/* Caveat: CSS provides custom styles */}
         <Nav.Item>
           <Nav.Link>
-            <Link to="/">
+            <Link to="/samsung">
               <Button variant="outline-dark" className="w-50">
                 SAMSUNG
               </Button>
             </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/addproduct">
+            <Link to="/xiaomi">
               <Button variant="outline-dark" className="w-50">
                 XIAOMI
               </Button>
             </Link>
           </Nav.Link>
           <Nav.Link>
-            <Link to="/allorders">
+            <Link to="/realme">
               <Button variant="outline-dark" className="w-50">
-                OPPO
+                Realme
               </Button>
             </Link>
           </Nav.Link>
