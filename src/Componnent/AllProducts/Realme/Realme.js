@@ -14,7 +14,7 @@ const Realme = () => {
   console.log(products.length);
 
   useEffect(() => {
-    const url = `http://localhost:5000/products`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/products`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProducts(data));

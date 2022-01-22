@@ -18,7 +18,7 @@ const UserProfile = () => {
   );
 
   useEffect(() => {
-    const url = `http://localhost:5000/userprofiledata`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/userprofiledata`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProfileData(data));

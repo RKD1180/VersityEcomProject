@@ -8,7 +8,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState({});
   useEffect(() => {
-    const url = `http://localhost:5000/products/${id}`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/products/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProduct(data));
@@ -25,7 +25,7 @@ const ProductDetails = () => {
       product_code: product.code,
       product_image: product.productImage,
     };
-    const url = `http://localhost:5000/init`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/init`;
     fetch(url, {
       method: "POST",
       headers: {

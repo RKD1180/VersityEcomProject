@@ -16,7 +16,7 @@ const SliderProduct = (props) => {
       product_price: price,
       product_code: code,
     };
-    const url = `http://localhost:5000/init`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/init`;
     fetch(url, {
       method: "POST",
       headers: {

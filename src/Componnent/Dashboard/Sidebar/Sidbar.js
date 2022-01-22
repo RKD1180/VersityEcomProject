@@ -11,7 +11,7 @@ const Sidbar = () => {
   const { user } = useAuth();
   const [users, setUsers] = useState(false);
   useEffect(() => {
-    fetch(`http://localhost:5000/users/${user.email}`)
+    fetch(`https://mighty-fjord-16205.herokuapp.com/users/${user.email}`)
       .then((res) => res.json())
       .then((data) => setUsers(data.admin));
   }, [user.email]);

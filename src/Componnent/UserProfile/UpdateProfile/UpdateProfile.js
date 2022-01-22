@@ -15,7 +15,7 @@ const UpdateProfile = ({ showProfile, handleProfileClose }) => {
 
   const handleProfileSubmit = (e) => {
     e.preventDefault();
-    const url = `http://localhost:5000/userprofile`;
+    const url = `https://mighty-fjord-16205.herokuapp.com/userprofile`;
     fetch(url, {
       method: "POST",
       headers: {
